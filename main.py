@@ -49,6 +49,8 @@ def train_loop(model, expt_type, dataloader, optimizer, device, dataset_len, los
 
         output = model(tweet_features, lens, labels)
 
+        print(output)
+
         _, preds = torch.max(output, 1)
 
         loss = loss_function(output, labels, loss_type, expt_type, scale)
@@ -240,10 +242,12 @@ if __name__ == "__main__":
     parser.add_argument("--batch-size", type=int, default=8,
                         help="batch size")
 
-    parser.add_argument("--epochs", type=int, default=50,
+#------------------------------------------------------------------------------
+    parser.add_argument("--epochs", type=int, default=10,
                         help="number of epochs")
 
-    parser.add_argument("--num-runs", type=int, default=50,
+#-----------------------------------------------------------------------------
+    parser.add_argument("--num-runs", type=int, default=2,
                         help="number of runs")
 
     parser.add_argument("--early-stop", type=int, default=10,

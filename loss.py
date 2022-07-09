@@ -7,9 +7,9 @@ import torch.nn.functional as F
 def true_metric_loss(true, no_of_classes, scale=1):
     batch_size = true.size(0)
     true = true.view(batch_size,1)
-    true_labels = torch.cuda.LongTensor(true).repeat(1, no_of_classes).float()
-    class_labels = torch.arange(no_of_classes).float().cuda()
-    phi = (scale * torch.abs(class_labels - true_labels)).cuda()
+    true_labels = torch.LongTensor(true).repeat(1, no_of_classes).float()
+    class_labels = torch.arange(no_of_classes).float()
+    phi = (scale * torch.abs(class_labels - true_labels))
     y = nn.Softmax(dim=1)(-phi)
     return y
 

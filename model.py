@@ -1,3 +1,4 @@
+from pickle import FALSE
 import torch
 import torch.nn as nn
 import numpy as np
@@ -38,7 +39,7 @@ class Attention(nn.Module):
         attentions = torch.softmax(F.relu(weights.squeeze()), dim=-1)
 
         # create mask based on the sentence lengths
-        mask = torch.ones(attentions.size(), requires_grad=True).cuda()
+        mask = torch.ones(attentions.size(), requires_grad=False)
         for i, l in enumerate(lengths):  # skip the first sentence
             if l < max_len:
                 mask[i, l:] = 0
